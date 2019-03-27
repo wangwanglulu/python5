@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/theme/white.css">
     <link rel="stylesheet" href="css/theme/custom.css">
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="lib/css/googlecode.css">
     <!-- Printing and PDF exports -->
     <script>
     var link = document.createElement('link');
@@ -25,16 +25,346 @@
         <div class="slides">
             <section data-background-video="bgm.mp4" data-background-video-loop data-background-video-muted style="text-align: left;">
                 <h2 style="color: white">Python Programming</h2>
-                <h5 style="color: white">Lecture 5 Complex Systems Intro, Functions</h5>
+                <h5 style="color: white">Lecture 5 Functions, Complex Systems</h5>
             </section>
             <section>
                 <section data-background="#2980b9" style="color: white">
-                    <h2 style="color: white">5.1 Functions (2)</h2>
+                    <h2 style="color: white">5.1 Functions (1)</h2>
+                </section>
+                <section>
+                    <ul>
+                        <li class="fragment">
+                            <p>A function is a named sequence of statements that performs a computation.</p>
+                        </li>
+                        <li class="fragment">
+                            <p>A function call</p>
+                        </li>
+                        <div class="fragment">
+                            <pre><code class="line-numbers" data-trim contenteditable>
+>>> type(32)
+</code></pre>
+                        </div>
+                        <li class="fragment">
+                            <p>Build-in Functions</p>
+                            <p>max(), min(), len(), int(), float(), str(), and etc.</p>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Defining a function</h3>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def print_lyrics():
+    print("I'm a lumberjack, and I'm okay.")
+    print('I sleep all night and I work all day.')
+print_lyrics()
+</code></pre>
+                    </div>
+                    <ul>
+                        <li class="fragment">
+                            <p>The first line of the function is called the header.</p>
+                            <li class="fragment">
+                                <p>The rest is called the body.</p>
+                            </li>
+                            <li class="fragment">
+                                <p>You can use it inside another function</p>
+                            </li>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def repeat_lyrics():
+    print_lyrics()
+    print_lyrics()
+
+>>> repeat_lyrics()
+I'm a lumberjack, and I'm okay.
+I sleep all night and I work all day.
+I'm a lumberjack, and I'm okay.
+I sleep all night and I work all day.
+</code></pre>
+                    </div>
+                </section>
+                <section>
+                    <h3>Parameters and arguments</h3>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def print_twice(bruce): #bruce is a parameter
+    print(bruce)
+    print(bruce)
+</code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+>>> print_twice('Spam')
+Spam
+Spam
+>>> print_twice(17)
+17
+17
+</code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+>>> michael = 'Eric, the half a bee.'
+>>> print_twice(michael)
+Eric, the half a bee.
+Eric, the half a bee.
+</code></pre>
+                    </div>
+                </section>
+                <section>
+                    <h3>Multiple parameters</h3>
+                    <ul>
+                        <li class="fragment">
+                            <p>Positional Arguments</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def describe_pet(animal_type, pet_name):
+    print("\nI have a " + animal_type + ".")
+    print("My " + animal_type + "'s name is " 
+        + pet_name.title() + ".")")
+describe_pet('hamster', 'harry')
+describe_pet('dog', 'willie')
+
+I have a hamster.
+My hamster's name is Harry.
+I have a dog.
+My dog's name is Willie.
+</code></pre>
+                    </div>
+                </section>
+                <section>
+                    <ul>
+                        <li class="fragment">
+                            <p>Order Matters in Positional Arguments</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def describe_pet(animal_type, pet_name):
+    print("\nI have a " + animal_type + ".")
+    print("My " + animal_type + "'s name is " 
+        + pet_name.title() + ".")
+
+describe_pet('harry', 'hamster')
+
+I have a harry.
+My harry's name is Hamster.
+</code></pre>
+                    </div>
+                </section>
+                <section>
+                    <ul>
+                        <li class="fragment">
+                            <p>Keyword Arguments</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def describe_pet(animal_type, pet_name):
+    print("\nI have a " + animal_type + ".")
+    print("My " + animal_type + "'s name is " 
+        + pet_name.title() + ".")
+
+describe_pet(animal_type='hamster', pet_name='harry')
+</code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+describe_pet(animal_type='hamster', pet_name='harry')
+describe_pet(pet_name='harry', animal_type='hamster')
+</code></pre>
+                    </div>
+                </section>
+                <section>
+                    <ul>
+                        <li class="fragment">
+                            <p>Default Values</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def describe_pet(pet_name, animal_type='dog'): 
+#The second parameter still works.
+    print("\nI have a " + animal_type + ".")
+    print("My " + animal_type + "'s name is " 
+        + pet_name.title() + ".")
+
+describe_pet(pet_name='willie')
+
+I have a dog.
+My dog's name is Willie.
+
+describe_pet('willie')
+describe_pet(pet_name='harry', animal_type='hamster') 
+#The default value has been ignored.
+</code></pre>
+                    </div>
+                    <ul>
+                        <li class="fragment">
+                            <p>The following function calls have the same output.</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+# A dog named Willie.
+describe_pet('willie')
+describe_pet(pet_name='willie')
+
+# A hamster named Harry.
+describe_pet('harry', 'hamster')
+describe_pet(pet_name='harry', animal_type='hamster')
+describe_pet(animal_type='hamster', pet_name='harry')
+</code></pre>
+                    </div>
+                </section>
+                <section>
+                    <h3>Fruitful functions and void functions</h3>
+                    <ul>
+                        <li class="fragment">
+                            <p>Some of the functions yield results, fruitful fucntions</p>
+                            <p>Some of the functions do not return a value, void fucntions</p>
+                        </li>
+                        <li class="fragment">
+                            <p>To return a result from a function, we use the return statement in our function.</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def addtwo(a, b):
+    added = a + b
+    return added 
+    # if only return, then it will return None.
+
+x = addtwo(3, 5)
+print(x)
+</code></pre>
+                    </div>
+                    <ul>
+                        <li class="fragment">
+                            <p><b>If we want to return multiple values, the function return a tuple.</b></p>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Return Values</h3>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def get_formatted_name(first_name, last_name):
+    full_name = first_name + ' ' + last_name
+    return full_name.title()
+
+musician = get_formatted_name('jimi', 'hendrix')
+print(musician)
+
+Jimi Hendrix
+</code></pre>
+                    </div>
+                    <ul>
+                        <li class="fragment">
+                            <p>Making an Argument Optional</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def get_formatted_name(first_name, middle_name, last_name):
+    full_name = first_name + ' ' + middle_name + ' ' + last_name
+    return full_name.title()
+
+musician = get_formatted_name('john', 'lee', 'hooker')
+print(musician)
+</code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def get_formatted_name(first_name, last_name, middle_name=''):
+    if middle_name:
+        full_name = first_name + ' ' + middle_name + ' ' + last_name
+    else:
+        full_name = first_name + ' ' + last_name
+    return full_name.title()
+
+musician = get_formatted_name('jimi', 'hendrix')
+print(musician)
+</code></pre>
+                    </div>
+                </section>
+                <section>
+                    <ul>
+                        <li class="fragment">
+                            <p>Returning a Dictionary</p>
+                        </li>
+                        <li class="fragment">
+                            <p>A function can return any kind of value you need it to, including more complicated data structures like lists and dictionaries.</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def build_person(first_name, last_name):
+    person = {'first': first_name, 'last': last_name}
+    return person
+
+musician = build_person('jimi', 'hendrix')
+print(musician)
+
+{'first': 'jimi', 'last': 'hendrix'}
+</code></pre>
+                    </div>
+                </section>
+                <section>
+                    <ul>
+                        <li class="fragment">
+                            <p>Using a Function with a while Loop</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def get_formatted_name(first_name, last_name):
+    full_name = first_name + ' ' + last_name
+    return full_name.title()
+
+while True:
+    print("\nPlease tell me your name:")
+    f_name = input("First name: ")
+    l_name = input("Last name: ")
+    formatted_name = get_formatted_name(f_name,l_name)
+    print("\nHello, " + formatted_name + "!")
+</code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def get_formatted_name(first_name, last_name):
+    full_name = first_name + ' ' + last_name
+    return full_name.title()
+
+while True:
+    print("\nPlease tell me your name:")
+    print("(enter 'q' at any time to quit)")
+
+    f_name = input("First name: ")
+    if f_name == 'q':
+        break
+    l_name = input("Last name: ")
+    if l_name == 'q':
+        break
+
+    formatted_name = get_formatted_name(f_name, l_name)
+    print("\nHello, " + formatted_name + "!")
+</code></pre>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section data-background="#2980b9" style="color: white">
+                    <h2 style="color: white">5.2 Functions (2)</h2>
                     <p>mutable vs. immutable, variable scope</p>
                 </section>
                 <section>
                     <h3>mutable vs. immutable</h3>
-                    <div class="fragment">
+                    <div id='left' class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 def ChangeInt( a ):
     a = 10
@@ -46,7 +376,7 @@ print( b )
 2
 </code></pre>
                     </div>
-                    <div class="fragment">
+                    <div id='right' class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 def ChangeInt( a ):
     a = 10
@@ -65,7 +395,7 @@ None
                     </div>
                 </section>
                 <section>
-                    <div class="fragment">
+                    <div id='left' class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 def ChangeInt( a ):
     a = 10
@@ -83,7 +413,7 @@ print(ChangeInt(b))
 10
 </code></pre>
                     </div>
-                    <div class="fragment">
+                    <div id='right' class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 def ChangeInt( a ):
     a = 10
@@ -202,12 +532,14 @@ fun1()
                     </div>
                 </section>
                 <section>
+                    <div id='left'>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 def outer():
     num = 10
     def inner():
-        nonlocal num   # nonlocal keyword
+        nonlocal num   
+        # nonlocal keyword
         num = 100
         print(num)
     inner()
@@ -218,12 +550,15 @@ outer()
 100
 </code></pre>
                     </div>
+                    </div>
+                    <div id='right'>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 def outer():
     num = 10
     def inner():
-        global num  # global does not work
+        global num  
+        # global does not work
         num = 100
         print(num)
     inner()
@@ -234,9 +569,10 @@ outer()
 10
 </code></pre>
                     </div>
+                    </div>
                 </section>
                 <section>
-                    <div class="fragment">
+                    <div id='left' class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 def outer():
     global num
@@ -253,7 +589,7 @@ outer()
 100
 </code></pre>
                     </div>
-                    <div class="fragment">
+                    <div id='right' class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 def outer():
     global num
@@ -271,7 +607,7 @@ outer()
                     </div>
                 </section>
                 <section>
-                    <div class="fragment">
+                    <div id='left' class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 num = 3                            
 def outer():
@@ -290,7 +626,7 @@ print(num)
 10
 </code></pre>
                     </div>
-                    <div class="fragment">
+                    <div id='right' class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 num = 3                            
 def outer():
@@ -311,7 +647,7 @@ print(num)
                     </div>
                 </section>
                 <section>
-                    <div class="fragment">
+                    <div id='left' class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 num = 3                            
 def outer():
@@ -330,7 +666,7 @@ print(num)
 3
 </code></pre>
                     </div>
-                    <div class="fragment">
+                    <div id='right' class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 num = 3                            
 def outer():
@@ -409,34 +745,14 @@ func()
 print(name)
 </code></pre>
                     </div>
-                    <div id="rightc" class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
-name = "lzl"
-def f1():
-    name = "Eric"
-    def f2():
-        name = "Snor"
-        print(name)
-    f2()
-f1()
-</code></pre>
-                    </div>
-                    <div id="rightc" class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
-name = "lzl"
-def f1():
-    name = "Eric"
-    def f2():
-        print(name)
-    f2()
-f1()
-</code></pre>
-                    </div>
+<ul>
+    <li class="fragment">Two other examples for exercise.</li>
+</ul>
                 </section>
             </section>
             <section>
                 <section data-background="#2980b9" style="color: white">
-                    <h2 style="color: white">5.2 Complex Systems</h2>
+                    <h2 style="color: white">5.3 Complex Systems</h2>
                 </section>
                 <section>
                     <ul>
@@ -504,7 +820,7 @@ f1()
             </section>
             <section>
                 <section data-background="#2980b9" style="color: white">
-                    <h2 style="color: white">5.3 Cellular automaton</h2>
+                    <h2 style="color: white">5.4 Cellular automaton</h2>
                 </section>
                 <section>
                     <ul>
@@ -593,96 +909,7 @@ f1()
                     </ul>
                 </section>
             </section>
-            <section>
-                <section data-background="#2980b9" style="color: white">
-                    <h2 style="color: white">5.4 Game of Life</h2>
-                </section>
-                <section>
-                    <ul>
-                        <li class="fragment">
-                            <p>Stephen Wolfram was not the only mathematician to study cellular automata. Probably the most famous cellular automaton was invented by John Conway and is called the Game of Life.</p>
-                        </li>
-                    </ul>
-                    <div class="fragment"><img data-src="conway.jpg" style="height: 200pt"></div>
-                    <ul>
-                        <li class="fragment">
-                            <p>Conway is currently Professor Emeritus of Mathematics at Princeton University in New Jersey.</p>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <h3>Game of Life</h3>
-                    <ul>
-                        <li class="fragment">
-                            <p>Conway’s automaton consists of cells that are laid out on a two-dimensional grid.</p>
-                        </li>
-                        <li class="fragment">
-                            <p>this grid goes on indefinitely in all directions. Each cell on the grid has eight neighbors: the cells that surround it orthogonally and diagonally. Each cell can be in two different states: It is either dead or alive.</p>
-                        </li>
-                        <li class="fragment">
-                            <p>In most examples, dead cells are rendered white, while live cells are colored black.</p>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <h3>Rules</h3>
-                    <ul>
-                        <li class="fragment">
-                            <p>A live cell that has fewer than two live neighbors dies from loneliness.</p>
-                        </li>
-                        <li class="fragment">
-                            <p>A live cell that has more than three live neighbors dies from overcrowding.</p>
-                        </li>
-                        <li class="fragment">
-                            <p>A live cell that has two or three live neighbors stays alive.</p>
-                        </li>
-                        <li class="fragment">
-                            <p>A dead cell that has exactly three live neighbors becomes alive.</p>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <h3>Example</h3>
-                    <div class="fragment"><img data-src="iteration.png" style="height: 100pt"></div>
-                    <ul>
-                        <li class="fragment">
-                            <p>When set into motion, the Game of Life usually has quite chaotic results, with a lot of activity exploding from its original live cells.</p>
-                        </li>
-                        <li class="fragment">
-                            <p>Demo: Game of Life (Random)</p>
-                        </li>
-                        <li class="fragment">
-                            <p>Frequently after a number of iterations the Game of Life settles in a more or less stable configuration, sometimes with a few groups of cells that oscillate between two states.</p>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <ul>
-                        <li class="fragment">
-                            <p>One of the earliest questions that the researchers studying the Game of Life asked themselves was this: “Is there an initial configuration of live cells that expands forever?”</p>
-                        </li>
-                        <li class="fragment">
-                            <p><b>glider</b></p>
-                        </li>
-                        <div class="fragment"><img data-src="glider.png" style="height: 100pt"></div>
-                        <li class="fragment">
-                            <p>Demo: glider and double gliders</p>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <ul>
-                        <li class="fragment">
-                            <p>Glider gun</p>
-                        </li>
-                        <div class="fragment"><img data-src="glidergun.png" style="height: 150pt"></div>
-                        <div class="fragment"><img data-src="glider_gun.gif" style="height: 150pt"></div>
-                        <li class="fragment">
-                            <p>Demo: glider gun</p>
-                        </li>
-                    </ul>
-                </section>
-            </section>
+
             <section>
                 <section data-background="#2c3e50" style="color: white; text-align: left;">
                     <h2 style="color: white">Summary</h2>
