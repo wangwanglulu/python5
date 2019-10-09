@@ -64,7 +64,7 @@ def Loop():
 
 
 def Start():
-    os.system("clear")
+    os.system("cls")
     print('== Game of Life ==')
     print('Author: Pleiades')
     print('Press any key...')
@@ -74,7 +74,7 @@ def Start():
     PrintScreen()
     c = input()
     while c != 'q':
-        os.system("clear")
+        os.system("cls")
         Loop()
         c = input()
     print('End')
